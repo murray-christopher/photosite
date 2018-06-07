@@ -3,7 +3,8 @@ import Router from "vue-router";
 
 //admin console
 import DashboardLayout from "@/components/Admin/Layout/DashboardLayout.vue"
-import Collection from "@/components/Admin/View/Collection.vue"
+import Collections from "@/components/Admin/View/Collections.vue"
+import ManageCollection from "@/components/Admin/View/ManageCollection.vue"
 
 //signup pages
 import LoginLayout from "@/components/Signin/LoginLayout.vue"
@@ -26,9 +27,14 @@ const routes = [
     redirect: 'dash/collection',
     children: [
       {
-        path: 'collection',
-        name: 'collection',
-        component: Collection
+        path: 'collections',
+        name: 'collections',
+        component: Collections
+      },
+      {
+        path: 'managecollection',
+        name: 'managecollection',
+        component: ManageCollection
       }
     ]
   },

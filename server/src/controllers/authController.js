@@ -2,7 +2,7 @@ var bcrypt = require('bcrypt');
 const saltRounds = 5;
 const db = require('../models/query')
 var Dropbox = require('dropbox').Dropbox
-var dbx = new Dropbox({ accessToken: 'API Token Goes Here' })
+var dbx = new Dropbox({ accessToken: 'API Key Goes Here' })
 require('es6-promise').polyfill()
 require('isomorphic-fetch')
 
@@ -53,6 +53,7 @@ module.exports = {
     dbx.filesListFolder({path: '/img'})
       .then(function(response) {
         res.status(200).send(response.entries)
+        console.log(response.entries)
       })
       .catch(function(error) {
         console.error(error)

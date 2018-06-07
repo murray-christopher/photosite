@@ -21,7 +21,7 @@ export default {
         {
           name: 'Braxton',
           status: 'Published',
-          photoCount: '65',
+          photoCount: '87',
           cover: ''
         },
         {
