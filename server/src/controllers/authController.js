@@ -1,6 +1,11 @@
 var bcrypt = require('bcrypt');
 const saltRounds = 5;
 const db = require('../models/query')
+var Dropbox = require('dropbox').Dropbox
+var dbx = new Dropbox({ accessToken: 'API Token Goes Here' })
+require('es6-promise').polyfill()
+require('isomorphic-fetch')
+
 
 module.exports = {
   register(req, res) {
@@ -12,25 +17,26 @@ module.exports = {
       if(hash) {
         try {
           //not throwing an error
-          const user = db.query(`Insert INTO users VALUES(default, '${req.body.first_name}',
-          '${req.body.last_name}', '${hash}', '${req.body.email}') ON CONFLICT (email) DO NOTHING;`)
-          res.send({ message: `${req.body.first_name} Registered Successfully`})
+          const user = db.query(`Insert INTO users(id, first_name, last_name, pass_hash, email) VALUES(default, '${req.body.first_name}',
+          '${req.body.last_name}', '${hash}', '${req.body.email}') ON CONFLICT (email) Do Update Set status=;`)
         }
         catch(err) {
           res.status(400).send({
             error: 'This email account is already in use.'
           })
         }
+        res.send({ message: `${req.body.first_name} Registered Successfully`})
       }
     })
   },
-  async login(req, res) {
+  login(req, res) {
     try {
       //get pass_hash
-      const user = await db.query(`select pass_hash from users where email = '${req.body.email}';`)
+      console.log(`select pass_hash from users where email = '${req.body.email}';`)
+      const user = db.query(`select pass_hash from users where email = '${req.body.email}';`)
       console.log(user.row[0].pass_hash)
       //check for match
-      const match = await password.compare(req.body.password, user.row[0].pass_hash)
+      const match = password.compare(req.body.password, user.row[0].pass_hash)
       if(match) {
         //login
         res.status(200).send({
@@ -42,5 +48,14 @@ module.exports = {
         error: 'Email or pasword is incorrect'
       })
     }
+  },
+  dropbox(req, res) {
+    dbx.filesListFolder({path: '/img'})
+      .then(function(response) {
+        res.status(200).send(response.entries)
+      })
+      .catch(function(error) {
+        console.error(error)
+      });
   }
 }

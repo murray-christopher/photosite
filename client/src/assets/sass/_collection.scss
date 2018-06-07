@@ -1,0 +1,17 @@
+.collection {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
+  margin: 50px;
+}
+
+.collection-item {
+  width: 300px;
+  flex: 0 1 auto;
+  padding: 15px;
+  text-align: left;
+  img {
+    width: 300px;
+    max-height: 200px;
+  }
+}

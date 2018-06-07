@@ -8,6 +8,7 @@ const cons = require('consolidate')
 const config = require('./config/config')
 const model = require('./models/query')
 
+
 //declare app
 const app = express()
 
