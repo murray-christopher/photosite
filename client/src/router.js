@@ -24,7 +24,7 @@ const routes = [
     path: '/dash',
     name: 'dashboard',
     component: DashboardLayout,
-    redirect: 'dash/collection',
+    redirect: 'dash/collections',
     children: [
       {
         path: 'collections',

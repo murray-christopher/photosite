@@ -1,8 +1,9 @@
 var bcrypt = require('bcrypt');
 const saltRounds = 5;
 const db = require('../models/query')
+const config = require('../config/config')
 var Dropbox = require('dropbox').Dropbox
-var dbx = new Dropbox({ accessToken: 'API Key Goes Here' })
+var dbx = new Dropbox({ accessToken: config.dropbox_api })
 require('es6-promise').polyfill()
 require('isomorphic-fetch')
 

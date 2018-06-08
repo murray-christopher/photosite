@@ -1,7 +1,7 @@
 <template>
   <div>
-    <p>Drop files in the box below</p>
-    <div class="dropzone" v-on:drop="drop" v-on:dragover="allowDrop"></div>
+    <input type="file" id="choose" multiple="multiple" />
+    <div id="uploadPreview"></div>
   </div>
 </template>
 
@@ -11,33 +11,37 @@ export default {
     return {
     }
   }, methods: {
-    allowDrop (allowdropevent) {
-      allowdropevent.target.style.color = 'blue';
-      allowdropevent.preventDefault();
-    },
-    drag (dragevent) {
-      dragevent.dataTransfer.setData("text", dragevent.target.id);
-      dragevent.target.style.color = 'green';
-    },
-    drop (dropevent) {
-      dropevent.preventDefault();
-      var data = dropevent.dataTransfer.getData()
-      console.log(data)
+    readImage (file) {
+      var reader = new FileReader();
+      var image = new Image();
+
+      reader.readAsDataURL(file);
+      reader.onload = function(_file) {
+          image.src = _file.target.result;              // url.createObjectURL(file);
+          image.onload = function() {
+              var w = this.width,
+          h = this.height,
+          t = file.type,                           // ext only: // file.type.split('/')[1],
+          n = file.name,
+          s = ~ ~(file.size / 1024) + 'KB';
+              $('#uploadPreview').append('<img src="' + this.src + '"> ' + w + 'x' + h + ' ' + s + ' ' + t + ' ' + n + '<br>');
+          };
+          image.onerror = function() {
+              alert('Invalid file type: ' + file.type);
+          }
+      }
     }
   }
 };
 </script>
 
 <style>
+body{ background-color: ivory; }
 .dropzone {
-    justify-content: center;
-    width:500px;
-    height: 300px;
-    padding: 10px;
-    margin-top: 10%;
-    border:1px solid #aaaaaa;
-    :on-hover {
-        background-color: grey;
-    }
+  width: 300px;
+  height: 200px;
+  border:1px
+  solid red;
+  margin:50px;
 }
 </style>

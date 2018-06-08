@@ -22,19 +22,19 @@ export default {
           name: 'Braxton',
           status: 'Published',
           photoCount: '87',
-          cover: ''
+          cover: 'https://dl.dropboxusercontent.com/s/9r00focece2klm6/1.jpeg?dl=0'
         },
         {
           name: 'Griffy',
           status: 'Published',
           photoCount: '145',
-          cover: ''
+          cover: 'https://dl.dropboxusercontent.com/s/9r00focece2klm6/1.jpeg?dl=0'
         },
         {
           name: 'Alli',
           status: 'Published',
           photoCount: '595',
-          cover: ''
+          cover: 'https://dl.dropboxusercontent.com/s/9r00focece2klm6/1.jpeg?dl=0'
         }
       ]
     }
